@@ -4,10 +4,21 @@ function Palabra() {
   return <p>¡Hola! Aparecí porque pulsaste el botón.</p>
 }
 
+//usado en sumar y restar numero
+function MostrarNumero({ x }){
+  return <p>{x}</p>
+}
+
+//usado en coger el valor de un imput y añadirlo a un parrafo
+function PonerPalabra({ palabra }){
+  return <p>Has escrito la palabra {palabra}</p>
+}
 
 export default function App() {
 
+  {/*LOGICA let [nombre variable, sunfion set] = useState(tipo de dato string, int, booleano, etc)*/}
   const [mostrar, setMostrar] = useState(false)
+
 
   function manejarClick() {
   
@@ -18,6 +29,24 @@ export default function App() {
       setMostrar(true)
     }
     console.log("Cambiando estado...")
+  }
+
+  {/*ejemplo suma y resta*/}
+  let [num, setNum] = useState(0)
+
+  function suma(){
+    setNum(num += 1)
+  }
+
+  function resta(){
+    setNum(num -= 1)
+  }
+
+  {/*ejemplo obtener valor imput y ponerlo en un texto*/}
+  let [pal, setPal] = useState("ninguno")
+
+  function cogerInput() {
+    setPal(document.getElementById("Palabra").value)      
   }
 
   return (
@@ -32,6 +61,19 @@ export default function App() {
 
       <button onClick={manejarClick}>Pulsar</button>
       {mostrar && <Palabra />}
+
+      {/*ejemplo suma y resta*/}
+
+      <button onClick={suma}>Sumar numero</button>
+      <button onClick={resta}>Restar numero</button>
+      {<MostrarNumero x={num} />}
+
+      {/*ejemplo obtener valor imput y ponerlo en un texto*/}
+      <input type="text" name="" id="Palabra" />
+
+      <button onClick={cogerInput}>Poner Palabra</button>
+      {<PonerPalabra palabra={pal} />}
+
     </div>
     
   )
@@ -62,6 +104,7 @@ export function Numero({x}) {
     </div>
   )
 }
+
 
 //export default App
 //export default App2 
